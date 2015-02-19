@@ -3,19 +3,10 @@
 	include_once("minifier.php");
 	
 	/* FILES ARRAYs
-	 * Keys as input, Values as output */ 
+	 * Provide path to files for minification */ 
 	
-	$js = array(
-		"js/application.js" 	=> "js/application.min.js",
-		"js/main.js" 			=> "js/main.min.js"
-	);
+	$jscss = array("js/application.js","js/main.js","css/application.css","css/main.css");
 	
-	$css = array(
-		"css/application.css"	=> "css/application.min.css",
-		"css/main.css"			=> "css/main.min.css"
-	);
-	
-	minifyJS($js);
-	minifyCSS($css);
+	minify($jscss);
 ?>
 </body>

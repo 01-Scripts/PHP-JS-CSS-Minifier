@@ -13,22 +13,33 @@
 	 * This services are property of Andy Chilton, http://chilts.org/
 	 *
 	 * Copyrighted 2013 by Toni Almeida, promatik.
+	 *
+	 * Edited 2015 by Michael Lorer, 01-Scripts.de
 	 */
 	
-	function minifyJS($arr){
-		minify($arr, 'http://javascript-minifier.com/raw');
-	}
-	
-	function minifyCSS($arr){
-		minify($arr, 'http://cssminifier.com/raw');
-	}
-	
-	function minify($arr, $url) {
-		foreach ($arr as $key => $value) {
-			$handler = fopen($value, 'w') or die("File <a href='" . $value . "'>" . $value . "</a> error!<br />");
-			fwrite($handler, getMinified($url, file_get_contents($key)));
+	function minify($arr) {
+		foreach ($arr as $file) {
+			switch(FileExtension($file)){
+				case "css":
+				  $url = "http://cssminifier.com/raw";
+				  break;
+				case "js":
+				  $url = "http://javascript-minifier.com/raw";
+				  break;
+				default:
+				  $url = "";
+			}
+
+			if(empty($url)) continue;
+
+			$handler = fopen($file, 'r+');
+			if(!$handler) continue;
+
+			$content = file_get_contents($file);
+			ftruncate($handler, 0);
+			fwrite($handler, getMinified($url, $content));
 			fclose($handler);
-			echo "File <a href='" . $value . "'>" . $value . "</a> done!<br />";
+			echo "File <a href='" . $file . "'>" . $file . "</a> done!<br />";
 		}
 	}
 	
@@ -38,6 +49,13 @@
 	        'header'  => 'Content-type: application/x-www-form-urlencoded',
 	        'content' => http_build_query( array('input' => $content) ) ) );
 		return file_get_contents($url, false, stream_context_create($postdata));
+	}
+
+	function FileExtension($filestring){
+		if(empty($filestring)) return "";
+
+		$pathinfo = pathinfo($filestring);
+		return strtolower($pathinfo['extension']);
 	}
 	
 ?>
