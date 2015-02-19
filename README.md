@@ -18,7 +18,7 @@ include_once("minifier.php");
 
 $jscss = array("js/application.js","js/main.js","css/application.css","css/main.css");
     
-minifyJSCSS($jscss);
+minify($jscss);
 ```
 
 ## Features
