@@ -17,8 +17,9 @@
 	 * Edited 2015 by Michael Lorer, 01-Scripts.de
 	 */
 	
-	function minify($arr) {
+	function minify($arr, $addpath="") {
 		foreach ($arr as $file) {
+			$file = $addpath.$file;
 			switch(FileExtension($file)){
 				case "css":
 				  $url = "http://cssminifier.com/raw";
