@@ -7,9 +7,6 @@ This plugin uses an online service provided by Andy Chilton, http://chilts.org/
 
 This fork of the plugin just uses one single one dimensional array for the files to minimize. If its a JS or CSS file is determined by the file extension. The input file gets overwritten with the minimized content.
 
-## Download
-* [Master branch](https://github.com/promatik/php-js-css-minifier/archive/master.zip)
-
 ## Setup
 * How to setup the plugin:
 
