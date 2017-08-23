@@ -28,10 +28,10 @@
 			$file = $addpath.$file;
 			switch(FileExtension($file)){
 				case "css":
-				  $url = "http://cssminifier.com/raw";
+				  $url = "https://cssminifier.com/raw";
 				  break;
 				case "js":
-				  $url = "http://javascript-minifier.com/raw";
+				  $url = "https://javascript-minifier.com/raw";
 				  break;
 				default:
 				  $url = "";
