@@ -17,7 +17,13 @@
 	 * Edited 2015 by Michael Lorer, 01-Scripts.de
 	 */
 	
-	function minify($arr, $addpath="") {
+	/**
+	 * Determines type and sends content to the minimize service
+	 * @param $arr 			Array to js and css files to minimize
+	 * @param $addpath 		Provide optional root path for the files in $arr
+	 * @param $headcomment	Add an optional comment that is placed in front of the minimized files
+	 */
+	function minify($arr, $addpath="", $headcomment="") {
 		foreach ($arr as $file) {
 			$file = $addpath.$file;
 			switch(FileExtension($file)){
@@ -38,9 +44,12 @@
 
 			$content = file_get_contents($file);
 			ftruncate($handler, 0);
-			fwrite($handler, getMinified($url, $content));
+			$written = fwrite($handler, $headcomment.getMinified($url, $content));
 			fclose($handler);
-			echo "File <a href='" . $file . "'>" . $file . "</a> done!<br />";
+
+			if($written == 0 && !$content) return FALSE;
+
+			//echo "File <a href='" . $file . "'>" . $file . "</a> done!<br />";
 		}
 	}
 	
